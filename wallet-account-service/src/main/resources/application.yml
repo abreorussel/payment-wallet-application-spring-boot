@@ -1,0 +1,37 @@
+
+
+server:
+  error:
+    include-message: always
+    
+  port: 9002
+  
+  
+
+  
+spring:
+
+  application:
+    name: ACCOUNT-SERVICE 
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/database_name  #specify mysql database name
+    username:                                       #mysql username
+    password:                                       #mysql password
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    
+  jpa:
+    hibernate:
+      ddl-auto: update
+ 
+eureka:
+  client:
+    register-with-eureka: true        
+    fetch-registry: true
+    
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+      
+  instance:
+    hostname: localhost 
+ 

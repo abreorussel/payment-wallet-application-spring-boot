@@ -1,0 +1,54 @@
+
+
+server:
+  port: 9191
+  
+  
+spring:
+  application:
+    name:  API-GATEWAY
+    
+    
+  cloud:
+    gateway:
+      routes:
+      - id: USER-SERVICE
+        uri: lb://USER-SERVICE      
+        predicates:
+        - Path=/api/user          
+        - Path=/api/update-password/**
+        - Path=/api/update-phone/**
+        - Path=/api/update-email/**
+        - Path=/api/user/**
+        - Path=/api/user-account/**
+        
+        
+      - id: ACCOUNT-SERVICE
+        uri: lb://ACCOUNT-SERVICE      
+        predicates:
+        - Path=/api/account           
+        - Path=/api/update/**
+        - Path=/api/account-balance/**
+        - Path=/api/alltransactions/**
+        - Path=/api/account/**
+        - Path=/api/user-id/**
+      
+      - id: TRANSACTION-SERVICE
+        uri: lb://TRANSACTION-SERVICE      
+        predicates:
+        - Path=/api/transaction          
+        - Path=/api/transaction/**
+        - Path=/api/transaction-history/**
+        
+    
+
+eureka:
+  client:
+    register-with-eureka: true        
+    fetch-registry: true
+    
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+      
+  instance:
+    hostname: localhost 
